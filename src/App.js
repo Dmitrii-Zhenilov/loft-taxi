@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header';
-import {Login} from './pages/Login';
+import {LoginWithAuth} from './pages/Login';
 import {Map} from './pages/Map';
-import {Profile} from './pages/Profile';
+import {ProfileWithAuth} from './pages/Profile';
 import Registration from './pages/Registration';
+import {withAuth} from './components/AuthContext'
 
 
 class App extends React.Component {
@@ -12,8 +13,12 @@ class App extends React.Component {
   state = { currentPage: 'Login'}
 
   navigateTo = (page) => {
-    this.setState({currentPage: page})
-  }
+    if (this.props.isLoggedIn) {
+      this.setState({currentPage: page});
+    }else{
+      this.setState({currentPage: 'Login'});
+    }  
+  };
 
   render(){
     return <>
@@ -21,13 +26,13 @@ class App extends React.Component {
     <main>
       <section>
         {this.state.currentPage === 'Map' && <Map />}
-        {this.state.currentPage === 'Login' && <Login navigate={this.navigateTo}/>}
-        {this.state.currentPage === 'Profile' && <Profile />}
-        {this.state.currentPage === 'Registration' && <Registration navigate={this.navigateTo}/>}
+        {this.state.currentPage === 'Login' && <LoginWithAuth navigate={this.navigateTo} />}
+        {this.state.currentPage === 'Profile' && <ProfileWithAuth />}
+        {this.state.currentPage === 'Registration' && <Registration navigate={this.navigateTo} />}
       </section>
     </main>
     </>
   }
 }
 
-export default App;
+export default withAuth(App);

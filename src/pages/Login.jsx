@@ -1,6 +1,8 @@
 import React from 'react';
+import { withAuth } from '../components/AuthContext';
 
 export const Login = (props) => {
+
   return (<>
     <div className="logo">
       <div className="logoTaxi"></div>
@@ -13,7 +15,7 @@ export const Login = (props) => {
               <span>Email</span>
               <input type="text" placeholder='mail@mail.ru' className="loginInput" />
               <span>Пароль</span>
-              <input type="text" placeholder='*******' className="loginInput" />
+              <input type="password" placeholder='*******' className="loginInput" />
               <button className='loginButton'onClick={() => {props.navigate('Map')}}>Войти</button>
               <div className="bottomtext">
                 <span>Новый пользователь?</span>
@@ -27,3 +29,4 @@ export const Login = (props) => {
   );
 };
 
+export const LoginWithAuth = withAuth(Login)
