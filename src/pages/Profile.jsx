@@ -1,4 +1,5 @@
 import React from 'react';
+import { withAuth } from '../components/AuthContext';
 
 export const Profile = () => {
   return (
@@ -8,3 +9,4 @@ export const Profile = () => {
   );
 };
 
+export const ProfileWithAuth = withAuth(Profile);
